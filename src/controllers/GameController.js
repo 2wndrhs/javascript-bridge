@@ -19,6 +19,7 @@ class GameController {
   #gameStatusHandlers = Object.freeze({
     PLAYING: this.#inputMoving.bind(this),
     FAIL: this.#inputGameCommand.bind(this),
+    CLEAR: this.#finishGame.bind(this),
   });
 
   start() {
