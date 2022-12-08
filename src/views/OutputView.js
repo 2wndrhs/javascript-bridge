@@ -40,6 +40,10 @@ const OutputView = {
     Console.print(`\n${MESSAGE.IS_CLEAR(status)}`);
     Console.print(MESSAGE.TRY_COUNT(tryCount));
   },
+
+  printError(error) {
+    Console.print(`\n${error.message}`);
+  },
 };
 
 module.exports = OutputView;

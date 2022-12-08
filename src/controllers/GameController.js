@@ -30,7 +30,14 @@ class GameController {
   }
 
   #inputBridgeSize() {
-    InputView.readBridgeSize(this.#onInputBridgeSize.bind(this));
+    InputView.readBridgeSize((size) => {
+      try {
+        this.#onInputBridgeSize(size);
+      } catch (error) {
+        OutputView.printError(error);
+        this.#inputBridgeSize();
+      }
+    });
   }
 
   #onInputBridgeSize(size) {
@@ -42,7 +49,14 @@ class GameController {
   }
 
   #inputMoving() {
-    InputView.readMoving(this.#onInputMoving.bind(this));
+    InputView.readMoving((moving) => {
+      try {
+        this.#onInputMoving(moving);
+      } catch (error) {
+        OutputView.printError(error);
+        this.#inputMoving();
+      }
+    });
   }
 
   #onInputMoving(moving) {
@@ -61,7 +75,14 @@ class GameController {
   }
 
   #inputGameCommand() {
-    InputView.readGameCommand(this.#onInputGameCommand.bind(this));
+    InputView.readGameCommand((command) => {
+      try {
+        this.#onInputGameCommand(command);
+      } catch (error) {
+        OutputView.printError(error);
+        this.#inputGameCommand();
+      }
+    });
   }
 
   #onInputGameCommand(command) {
