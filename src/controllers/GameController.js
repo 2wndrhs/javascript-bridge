@@ -10,6 +10,7 @@ class GameController {
 
   #gameStatusHandlers = Object.freeze({
     PLAYING: this.#inputMoving.bind(this),
+    FAIL: this.#inputGameCommand.bind(this),
   });
 
   start() {
@@ -48,6 +49,12 @@ class GameController {
 
     this.#gameStatusHandlers[status]();
   }
+
+  #inputGameCommand() {
+    InputView.readGameCommand(this.#onInputGameCommand.bind(this));
+  }
+
+  #onInputGameCommand(command) {}
 }
 
 module.exports = GameController;

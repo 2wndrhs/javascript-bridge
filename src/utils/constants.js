@@ -8,7 +8,13 @@ const MOVING = Object.freeze({
   LOWER: 'D',
 });
 
+const COMMAND = Object.freeze({
+  RETRY: 'R',
+  QUIT: 'Q',
+});
+
 module.exports = {
   BRIDGE_SIZE,
   MOVING,
+  COMMAND,
 };
