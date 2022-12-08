@@ -22,7 +22,15 @@ class GameController {
     validate(size, isBridgeSize);
 
     this.#bridgeGame = new BridgeGame(size);
+
+    this.#inputMoving();
   }
+
+  #inputMoving() {
+    InputView.readMoving(this.#onInputMoving.bind(this));
+  }
+
+  #onInputMoving(moving) {}
 }
 
 module.exports = GameController;
