@@ -1,8 +1,9 @@
 const { Console } = require('@woowacourse/mission-utils');
+const { STATUS } = require('../utils/constants');
 
 const STATUS_MESSAGE = Object.freeze({
-  CLEAR: '성공',
-  FAIL: '실패',
+  [STATUS.CLEAR]: '성공',
+  [STATUS.FAIL]: '실패',
 });
 
 const MESSAGE = Object.freeze({

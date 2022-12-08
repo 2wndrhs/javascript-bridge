@@ -12,15 +12,15 @@ const {
   isMovingInput,
   isGameCommand,
 } = require('../utils/Validator');
-const { COMMAND } = require('../utils/constants');
+const { COMMAND, STATUS } = require('../utils/constants');
 
 class GameController {
   #bridgeGame;
 
   #gameStatusHandlers = Object.freeze({
-    PLAYING: this.#inputMoving.bind(this),
-    FAIL: this.#inputGameCommand.bind(this),
-    CLEAR: this.#finishGame.bind(this),
+    [STATUS.PLAYING]: this.#inputMoving.bind(this),
+    [STATUS.FAIL]: this.#inputGameCommand.bind(this),
+    [STATUS.CLEAR]: this.#finishGame.bind(this),
   });
 
   start() {

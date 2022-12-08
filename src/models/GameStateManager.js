@@ -24,7 +24,6 @@ class GameStateManager {
   }
 
   retry() {
-    this.#status = 'PLAYING';
     this.#stage = 0;
     this.#tryCount += 1;
   }

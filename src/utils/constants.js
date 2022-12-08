@@ -13,8 +13,15 @@ const COMMAND = Object.freeze({
   QUIT: 'Q',
 });
 
+const STATUS = Object.freeze({
+  PLAYING: 'PLAYING',
+  FAIL: 'FAIL',
+  CLEAR: 'CLEAR',
+});
+
 module.exports = {
   BRIDGE_SIZE,
   MOVING,
   COMMAND,
+  STATUS,
 };

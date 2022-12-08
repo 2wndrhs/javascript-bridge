@@ -3,7 +3,7 @@ const GameStateManager = require('./GameStateManager');
 const MovingHistory = require('./MovingHistory');
 
 const BridgeRandomNumberGenerator = require('../utils/BridgeRandomNumberGenerator');
-
+const { STATUS } = require('../utils/constants');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -17,7 +17,7 @@ class BridgeGame {
       Number(size),
       BridgeRandomNumberGenerator.generate,
     );
-    this.#gameStateManager = new GameStateManager('PLAYING', 0, 1);
+    this.#gameStateManager = new GameStateManager(STATUS.PLAYING, 0, 1);
   }
 
   /**
@@ -38,7 +38,7 @@ class BridgeGame {
 
   checkFailOrClear(stage, isRightMoving) {
     if (!isRightMoving) {
-      this.#gameStateManager.updateGameStatus('FAIL');
+      this.#gameStateManager.updateGameStatus(STATUS.FAIL);
       return;
     }
 
@@ -49,14 +49,14 @@ class BridgeGame {
     const isFinalStage = stage === this.#bridge.length - 1;
 
     if (isFinalStage) {
-      this.#gameStateManager.updateGameStatus('CLEAR');
+      this.#gameStateManager.updateGameStatus(STATUS.CLEAR);
     }
   }
 
   checkGamePlaying() {
     const { status } = this.getGameStates();
 
-    if (status === 'PLAYING') {
+    if (status === STATUS.PLAYING) {
       this.#gameStateManager.increaseStage();
     }
   }
@@ -69,6 +69,7 @@ class BridgeGame {
   retry() {
     MovingHistory.reset();
     this.#gameStateManager.retry();
+    this.#gameStateManager.updateGameStatus(STATUS.PLAYING);
   }
 
   getGameStates() {
