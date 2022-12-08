@@ -42,7 +42,7 @@ const MovingHistory = {
       return;
     }
 
-    this.bottomRow.push(MARK.RIGHT);
+    this.bottomRow.push(MARK.WRONG);
   },
 
   toString() {
