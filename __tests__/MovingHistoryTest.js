@@ -10,8 +10,9 @@ describe('MovingHistory 테스트', () => {
     'toString 메서드는 현재까지의 다리 건너기 결과를 문자열로 반환',
     (moving, stage, expected) => {
       const bridge = ['U', 'D', 'U'];
+      const isRightMoving = bridge[stage] === moving;
 
-      MovingHistory.log(bridge, moving, stage);
+      MovingHistory.log(moving, isRightMoving);
       const movingHistory = MovingHistory.toString();
 
       expect(movingHistory).toEqual(expected);
