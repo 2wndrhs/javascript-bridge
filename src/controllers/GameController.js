@@ -3,7 +3,12 @@ const BridgeGame = require('../models/BridgeGame');
 const InputView = require('../views/InputView');
 const OutputView = require('../views/OutputView');
 
-const { validate, isBridgeSize, isMovingInput } = require('../utils/Validator');
+const {
+  validate,
+  isBridgeSize,
+  isMovingInput,
+  isGameCommand,
+} = require('../utils/Validator');
 
 class GameController {
   #bridgeGame;
@@ -54,7 +59,9 @@ class GameController {
     InputView.readGameCommand(this.#onInputGameCommand.bind(this));
   }
 
-  #onInputGameCommand(command) {}
+  #onInputGameCommand(command) {
+    validate(command, isGameCommand);
+  }
 }
 
 module.exports = GameController;
