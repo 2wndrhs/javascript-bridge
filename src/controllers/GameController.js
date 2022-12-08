@@ -1,6 +1,8 @@
 const InputView = require('../views/InputView');
 const OutputView = require('../views/OutputView');
 
+const { validate, isBridgeSize } = require('../utils/Validator');
+
 class GameController {
   start() {
     OutputView.printStarting();
@@ -9,10 +11,12 @@ class GameController {
   }
 
   #inputBridgeSize() {
-    InputView.readBridgeSize(this.onInputBridgeSize.bind(this));
+    InputView.readBridgeSize(this.#onInputBridgeSize.bind(this));
   }
 
-  onInputBridgeSize(size) {}
+  #onInputBridgeSize(size) {
+    validate(size, isBridgeSize);
+  }
 }
 
 module.exports = GameController;
