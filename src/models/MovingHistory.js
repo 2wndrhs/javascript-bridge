@@ -41,6 +41,11 @@ const MovingHistory = {
     this.bottomRow.push(MARK.WRONG);
   },
 
+  reset() {
+    this.topRow = [];
+    this.bottomRow = [];
+  },
+
   toString() {
     return [this.topRow, this.bottomRow].map(
       (row) => `[ ${row.join(MARK.DIVIDER)} ]`,

@@ -9,6 +9,7 @@ const {
   isMovingInput,
   isGameCommand,
 } = require('../utils/Validator');
+const { COMMAND } = require('../utils/constants');
 
 class GameController {
   #bridgeGame;
@@ -61,6 +62,11 @@ class GameController {
 
   #onInputGameCommand(command) {
     validate(command, isGameCommand);
+
+    if (command === COMMAND.RETRY) {
+      this.#bridgeGame.retry();
+      this.#checkGameStatus();
+    }
   }
 }
 

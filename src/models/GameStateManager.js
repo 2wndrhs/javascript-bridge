@@ -16,6 +16,10 @@ class GameStateManager {
     this.#stage += 1;
   }
 
+  retry() {
+    this.#stage = 0;
+  }
+
   getGameStates() {
     return { status: this.#status, stage: this.#stage };
   }
