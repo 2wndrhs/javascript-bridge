@@ -1,4 +1,5 @@
 const BridgeMaker = require('../BridgeMaker');
+const GameStateManager = require('./GameStateManager');
 const MovingHistory = require('./MovingHistory');
 
 const BridgeRandomNumberGenerator = require('../utils/BridgeRandomNumberGenerator');
@@ -9,16 +10,14 @@ const BridgeRandomNumberGenerator = require('../utils/BridgeRandomNumberGenerato
 class BridgeGame {
   #bridge;
 
-  #stage;
-
-  #status;
+  #gameStateManager;
 
   constructor(size) {
     this.#bridge = BridgeMaker.makeBridge(
       Number(size),
       BridgeRandomNumberGenerator.generate,
     );
-    this.#stage = 0;
+    this.#gameStateManager = new GameStateManager('PLAYING', 0);
   }
 
   /**
@@ -27,13 +26,43 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(moving) {
-    const isRightMoving = this.#bridge[this.#stage] === moving;
+    const { stage } = this.getGameStates();
+    const isRightMoving = this.#bridge[stage] === moving;
 
     MovingHistory.log(moving, isRightMoving);
-
-    this.#stage += 1;
+    this.checkFailOrClear(stage, isRightMoving);
+    this.checkGamePlaying();
 
     return MovingHistory.toString();
+  }
+
+  checkFailOrClear(stage, isRightMoving) {
+    if (!isRightMoving) {
+      this.#gameStateManager.updateGameStatus('FAIL');
+      return;
+    }
+
+    this.checkGameClear(stage);
+  }
+
+  checkGameClear(stage) {
+    const isFinalStage = stage === this.#bridge.length - 1;
+
+    if (isFinalStage) {
+      this.#gameStateManager.updateGameStatus('CLEAR');
+    }
+  }
+
+  checkGamePlaying() {
+    const { status } = this.getGameStates();
+
+    if (status === 'PLAYING') {
+      this.#gameStateManager.increaseStage();
+    }
+  }
+
+  getGameStates() {
+    return this.#gameStateManager.getGameStates();
   }
 
   /**

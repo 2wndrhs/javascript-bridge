@@ -8,6 +8,10 @@ const { validate, isBridgeSize, isMovingInput } = require('../utils/Validator');
 class GameController {
   #bridgeGame;
 
+  #gameStatusHandlers = Object.freeze({
+    PLAYING: this.#inputMoving.bind(this),
+  });
+
   start() {
     OutputView.printStarting();
 
@@ -35,6 +39,14 @@ class GameController {
 
     const movingHistory = this.#bridgeGame.move(moving);
     OutputView.printMap(movingHistory);
+
+    this.#checkGameStatus();
+  }
+
+  #checkGameStatus() {
+    const { status } = this.#bridgeGame.getGameStates();
+
+    this.#gameStatusHandlers[status]();
   }
 }
 
