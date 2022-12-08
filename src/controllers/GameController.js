@@ -1,6 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 
 const BridgeGame = require('../models/BridgeGame');
+const MovingHistory = require('../models/MovingHistory');
 
 const InputView = require('../views/InputView');
 const OutputView = require('../views/OutputView');
@@ -75,6 +76,10 @@ class GameController {
   }
 
   #finishGame() {
+    const movingHistory = MovingHistory.toString();
+    const { status, tryCount } = this.#bridgeGame.getGameStates();
+
+    OutputView.printResult(movingHistory, status, tryCount);
     Console.close();
   }
 }

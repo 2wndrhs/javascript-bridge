@@ -3,9 +3,12 @@ class GameStateManager {
 
   #stage;
 
-  constructor(status, stage) {
+  #tryCount;
+
+  constructor(status, stage, tryCount) {
     this.#status = status;
     this.#stage = stage;
+    this.#tryCount = tryCount;
   }
 
   updateGameStatus(status) {
@@ -16,12 +19,22 @@ class GameStateManager {
     this.#stage += 1;
   }
 
+  increaseTryCount() {
+    this.#tryCount += 1;
+  }
+
   retry() {
+    this.#status = 'PLAYING';
     this.#stage = 0;
+    this.#tryCount += 1;
   }
 
   getGameStates() {
-    return { status: this.#status, stage: this.#stage };
+    return {
+      status: this.#status,
+      stage: this.#stage,
+      tryCount: this.#tryCount,
+    };
   }
 }
 

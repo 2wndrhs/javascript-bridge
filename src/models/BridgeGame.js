@@ -17,7 +17,7 @@ class BridgeGame {
       Number(size),
       BridgeRandomNumberGenerator.generate,
     );
-    this.#gameStateManager = new GameStateManager('PLAYING', 0);
+    this.#gameStateManager = new GameStateManager('PLAYING', 0, 1);
   }
 
   /**
@@ -68,7 +68,6 @@ class BridgeGame {
    */
   retry() {
     MovingHistory.reset();
-    this.#gameStateManager.updateGameStatus('PLAYING');
     this.#gameStateManager.retry();
   }
 
