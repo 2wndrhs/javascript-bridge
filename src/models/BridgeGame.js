@@ -30,22 +30,22 @@ class BridgeGame {
     const isRightMoving = this.#bridge[stage] === moving;
 
     MovingHistory.log(moving, isRightMoving);
-    this.checkFailOrClear(stage, isRightMoving);
-    this.checkGamePlaying();
+    this.#checkFailOrClear(stage, isRightMoving);
+    this.#checkGamePlaying();
 
     return MovingHistory.toString();
   }
 
-  checkFailOrClear(stage, isRightMoving) {
+  #checkFailOrClear(stage, isRightMoving) {
     if (!isRightMoving) {
       this.#gameStateManager.updateGameStatus(STATUS.FAIL);
       return;
     }
 
-    this.checkGameClear(stage);
+    this.#checkGameClear(stage);
   }
 
-  checkGameClear(stage) {
+  #checkGameClear(stage) {
     const isFinalStage = stage === this.#bridge.length - 1;
 
     if (isFinalStage) {
@@ -53,7 +53,7 @@ class BridgeGame {
     }
   }
 
-  checkGamePlaying() {
+  #checkGamePlaying() {
     const { status } = this.getGameStates();
 
     if (status === STATUS.PLAYING) {
