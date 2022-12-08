@@ -32,6 +32,9 @@ class GameController {
 
   #onInputMoving(moving) {
     validate(moving, isMovingInput);
+
+    const movingHistory = this.#bridgeGame.move(moving);
+    OutputView.printMap(movingHistory);
   }
 }
 
