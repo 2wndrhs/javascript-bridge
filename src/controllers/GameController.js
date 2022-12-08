@@ -1,3 +1,5 @@
+const { Console } = require('@woowacourse/mission-utils');
+
 const BridgeGame = require('../models/BridgeGame');
 
 const InputView = require('../views/InputView');
@@ -66,7 +68,13 @@ class GameController {
     if (command === COMMAND.RETRY) {
       this.#bridgeGame.retry();
       this.#checkGameStatus();
+      return;
     }
+    this.#finishGame();
+  }
+
+  #finishGame() {
+    Console.close();
   }
 }
 
