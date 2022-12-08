@@ -12,20 +12,18 @@ const MovingHistory = {
 
   bottomRow: [],
 
-  log(bridge, moving, stage) {
+  log(moving, isRightMoving) {
     if (moving === MOVING.UPPER) {
-      this.generateTopRow(bridge, moving, stage);
+      this.generateTopRow(isRightMoving);
       this.bottomRow.push(MARK.BLANK);
       return;
     }
 
-    this.generateBottomRow(bridge, moving, stage);
+    this.generateBottomRow(isRightMoving);
     this.topRow.push(MARK.BLANK);
   },
 
-  generateTopRow(bridge, moving, stage) {
-    const isRightMoving = bridge[stage] === moving;
-
+  generateTopRow(isRightMoving) {
     if (isRightMoving) {
       this.topRow.push(MARK.RIGHT);
       return;
@@ -34,9 +32,7 @@ const MovingHistory = {
     this.topRow.push(MARK.WRONG);
   },
 
-  generateBottomRow(bridge, moving, stage) {
-    const isRightMoving = bridge[stage] === moving;
-
+  generateBottomRow(isRightMoving) {
     if (isRightMoving) {
       this.bottomRow.push(MARK.RIGHT);
       return;
